@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/behavioral-lift/taxonomy/llm_schema.json",
+  "title": "LLM Annotation Output Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["evaluation", "evaluator_notes"],
+  "properties": {
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reasoning_quality",
+        "advanced_and_metacognitive",
+        "reasoning_types",
+        "failure_modes",
+        "summary_metrics"
+      ],
+      "properties": {
+        "reasoning_quality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "reasoning_present",
+            "logical_steps_valid",
+            "reaches_correct_conclusion",
+            "context_understanding"
+          ],
+          "properties": {
+            "reasoning_present": { "type": "boolean" },
+            "logical_steps_valid": { "type": "boolean" },
+            "reaches_correct_conclusion": { "type": "boolean" },
+            "context_understanding": { "type": "boolean" }
+          }
+        },
+        "advanced_and_metacognitive": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "planning_present",
+            "hypothesis_testing",
+            "self_correction",
+            "uncertainty_acknowledgment",
+            "evidence_citation",
+            "confidence_calibration",
+            "self_awareness",
+            "goal_tracking",
+            "knowledge_alignment"
+          ],
+          "properties": {
+            "planning_present": { "type": "boolean" },
+            "hypothesis_testing": { "type": "boolean" },
+            "self_correction": { "type": "boolean" },
+            "uncertainty_acknowledgment": { "type": "boolean" },
+            "evidence_citation": { "type": "boolean" },
+            "confidence_calibration": { "type": "boolean" },
+            "self_awareness": { "type": "boolean" },
+            "goal_tracking": { "type": "boolean" },
+            "knowledge_alignment": { "type": "boolean" }
+          }
+        },
+        "reasoning_types": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mathematical_reasoning",
+            "logical_reasoning",
+            "causal_reasoning",
+            "analogical_reasoning",
+            "procedural_reasoning",
+            "factual_recall",
+            "conceptual_reasoning"
+          ],
+          "properties": {
+            "mathematical_reasoning": { "type": "boolean" },
+            "logical_reasoning": { "type": "boolean" },
+            "causal_reasoning": { "type": "boolean" },
+            "analogical_reasoning": { "type": "boolean" },
+            "procedural_reasoning": { "type": "boolean" },
+            "factual_recall": { "type": "boolean" },
+            "conceptual_reasoning": { "type": "boolean" }
+          }
+        },
+        "failure_modes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "factual_error",
+            "logical_failure",
+            "context_misread",
+            "knowledge_gap",
+            "post_hoc_rationalization",
+            "shortcut",
+            "lucky_guess"
+          ],
+          "properties": {
+            "factual_error": { "type": "boolean" },
+            "logical_failure": { "type": "boolean" },
+            "context_misread": { "type": "boolean" },
+            "knowledge_gap": { "type": "boolean" },
+            "post_hoc_rationalization": { "type": "boolean" },
+            "shortcut": { "type": "boolean" },
+            "lucky_guess": { "type": "boolean" }
+          }
+        },
+        "summary_metrics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "complexity_score",
+            "reasoning_direction",
+            "efficiency",
+            "overall_quality",
+            "would_make_good_judge"
+          ],
+          "properties": {
+            "complexity_score": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "reasoning_direction": {
+              "type": "string",
+              "enum": ["forward", "backward", "mixed"]
+            },
+            "efficiency": {
+              "type": "string",
+              "enum": ["concise", "verbose", "insufficient"]
+            },
+            "overall_quality": {
+              "type": "string",
+              "enum": ["strong", "flawed", "poor"]
+            },
+            "would_make_good_judge": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "evaluator_notes": {
+      "type": "string"
+    }
+  }
+}

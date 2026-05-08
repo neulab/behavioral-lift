@@ -1,0 +1,185 @@
+modality: vlm
+description: "VLM annotation taxonomy for visual grounding, reasoning quality, metacognitive behaviors, reasoning types, failure modes, and summary metrics."
+groups:
+  visual_grounding:
+    description: "Labels describing whether and how the response uses the image."
+    fields:
+      visual_references_present:
+        type: boolean
+        definition: "Does the chain of thought explicitly mention specific visual elements?"
+        true_if: "Mentions concrete visual details such as objects, colors, counts, or positions."
+        false_if: "Generic reasoning with no visual specifics."
+      visual_claims_accurate:
+        type: boolean
+        definition: "Are all visual descriptions factually correct?"
+        true_if: "All mentioned visual details match the image."
+        false_if: "Hallucinated objects, wrong colors, incorrect counts, or wrong spatial relations."
+      visual_input_necessary:
+        type: boolean
+        definition: "Could this question be answered without seeing the image?"
+        true_if: "Requires specific visual details to answer."
+        false_if: "Could be answered from question text alone or general knowledge."
+
+  reasoning_quality:
+    description: "Reasoning-quality labels."
+    fields:
+      reasoning_present:
+        type: boolean
+        definition: "Is there actual step-by-step reasoning rather than a direct answer?"
+        true_if: "Shows intermediate steps, explanations, or deductions."
+        false_if: "Jumps directly to the answer with no reasoning shown."
+      logical_steps_valid:
+        type: boolean
+        definition: "Do the reasoning steps logically follow from each other?"
+        true_if: "Steps are coherent and valid."
+        false_if: "Contains non-sequiturs, invalid inferences, circularity, or logical gaps."
+      reaches_correct_conclusion:
+        type: boolean
+        definition: "Does the chain of thought lead to the correct answer?"
+        true_if: "Final answer matches ground truth."
+        false_if: "Final answer is wrong."
+
+  metacognitive_behaviors:
+    description: "Shared higher-order behaviors used for cross-modal analysis."
+    fields:
+      planning_present:
+        type: boolean
+        definition: "Does it break the problem into sub-steps or make a plan upfront?"
+        true_if: "Explicit decomposition or plan before solving."
+        false_if: "Solves directly without structure."
+      hypothesis_testing:
+        type: boolean
+        definition: "Does it propose multiple possibilities and test them?"
+        true_if: "Considers alternatives or checks competing interpretations."
+        false_if: "Commits to the first interpretation."
+      self_correction:
+        type: boolean
+        definition: "Does it revise or correct earlier claims?"
+        true_if: "Explicitly revises or retracts an earlier step."
+        false_if: "Never revisits earlier claims."
+      uncertainty_acknowledgment:
+        type: boolean
+        definition: "Does it explicitly note ambiguity or uncertainty?"
+        true_if: "Notes uncertainty or ambiguity."
+        false_if: "States everything with full certainty."
+      evidence_citation:
+        type: boolean
+        definition: "Does it reference specific visual evidence to support claims?"
+        true_if: "Grounds claims in specific image details."
+        false_if: "Makes claims without visual support."
+      confidence_calibration:
+        type: boolean
+        definition: "Does confidence match reasoning strength?"
+        true_if: "Uncertain when reasoning is weak; confident when reasoning is strong."
+        false_if: "Overconfident with weak reasoning, or underconfident with strong reasoning."
+      self_awareness:
+        type: boolean
+        definition: "Does it recognize the limits of what can be determined from the image?"
+        true_if: "Notes that some conclusion cannot be determined from available visual information."
+        false_if: "Claims certainty beyond what the image supports."
+      goal_tracking:
+        type: boolean
+        definition: "Does it maintain and reference sub-goals in multi-step problems?"
+        true_if: "Tracks progress toward intermediate goals."
+        false_if: "Loses track of the original objective."
+      knowledge_alignment:
+        type: boolean
+        definition: "Does it invoke appropriate domain schemas to interpret visual content?"
+        true_if: "Applies relevant domain concepts to solve the problem."
+        false_if: "Only describes surface features or applies the wrong domain knowledge."
+
+  reasoning_types:
+    description: "Types of reasoning used in the response."
+    fields:
+      spatial_reasoning:
+        type: boolean
+        definition: "Analyzes position, layout, or relative location."
+        true_if: "Reasons about left/right, above/below, containment, distance, or orientation."
+        false_if: "No spatial analysis."
+      counting_reasoning:
+        type: boolean
+        definition: "Involves quantitative analysis or enumeration."
+        true_if: "Counts objects, compares quantities, or estimates numerically."
+        false_if: "No counting or quantity comparison."
+      compositional_reasoning:
+        type: boolean
+        definition: "Combines multiple attributes or objects."
+        true_if: "Integrates several visual attributes or elements."
+        false_if: "Relies on a single attribute only."
+      causal_reasoning:
+        type: boolean
+        definition: "Analyzes cause-effect relationships."
+        true_if: "Explains mechanisms or effects."
+        false_if: "No causal analysis."
+      mathematical_reasoning:
+        type: boolean
+        definition: "Involves calculations, equations, charts, or graphs."
+        true_if: "Uses arithmetic, geometry, or quantitative interpretation."
+        false_if: "No mathematical operations."
+      temporal_reasoning:
+        type: boolean
+        definition: "Involves sequence, time, or temporal relations."
+        true_if: "Reasons about before/after, order, stages, or prediction over time."
+        false_if: "No temporal analysis."
+
+  failure_modes:
+    description: "Failure modes. A true value means the failure occurred."
+    fields:
+      visual_hallucination:
+        type: boolean
+        definition: "Claims objects or attributes not present in the image."
+        true_if: "Mentions nonexistent objects, colors, text, or features."
+        false_if: "All visual claims are accurate."
+      visual_neglect:
+        type: boolean
+        definition: "Misses critical visual details that are present."
+        true_if: "Overlooks key information needed for the answer."
+        false_if: "Attends to relevant visual information."
+      logical_failure:
+        type: boolean
+        definition: "Reasoning steps do not connect or contain errors."
+        true_if: "Invalid inferences, contradictions, or non-sequiturs."
+        false_if: "All logical steps are valid."
+      language_bias:
+        type: boolean
+        definition: "Over-relies on text priors instead of visual content."
+        true_if: "Answer follows stereotypes or textual priors rather than image evidence."
+        false_if: "Reasoning is grounded in the image."
+      post_hoc_rationalization:
+        type: boolean
+        definition: "Appears to give the answer first, then invent reasoning."
+        true_if: "Reasoning seems reverse-engineered and does not support the conclusion."
+        false_if: "Reasoning genuinely leads to the conclusion."
+      shortcut:
+        type: boolean
+        definition: "Skips important reasoning steps or bypasses visual analysis."
+        true_if: "Jumps to the conclusion without needed intermediate steps."
+        false_if: "Complete reasoning chain is present."
+      lucky_guess:
+        type: boolean
+        definition: "Reaches the correct answer with wrong or irrelevant reasoning."
+        true_if: "Correct answer but invalid supporting reasoning."
+        false_if: "Correct answer with valid supporting reasoning."
+
+  summary_metrics:
+    description: "Trace-level summary metrics."
+    fields:
+      complexity_score:
+        type: integer
+        values: [1, 2, 3, 4, 5]
+        definition: "1 = single-step inference; 2 = sequential 2-3 steps; 3 = multi-step with dependencies; 4 = hierarchical with sub-problems; 5 = complex reasoning with hypothesis testing and corrections."
+      reasoning_direction:
+        type: categorical
+        values: ["forward", "backward", "mixed"]
+        definition: "forward = starts from given information and works toward the answer; backward = starts from answer options and works backward; mixed = combines both."
+      efficiency:
+        type: categorical
+        values: ["concise", "verbose", "insufficient"]
+        definition: "concise = appropriate length with necessary steps; verbose = unnecessarily long or repetitive; insufficient = too short and missing key steps."
+      overall_quality:
+        type: categorical
+        values: ["strong", "flawed", "poor"]
+        definition: "strong = sound reasoning and accurate grounding; flawed = reasoning present but with notable issues; poor = major failures or no real reasoning."
+      would_make_good_judge:
+        type: boolean
+        definition: "Whether this model's reasoning would be trustworthy for judging other models' responses."
