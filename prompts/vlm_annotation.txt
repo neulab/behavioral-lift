@@ -1,0 +1,47 @@
+You are evaluating the chain-of-thought reasoning quality of a vision-language model. Analyze the model's reasoning process using the taxonomy below. Be strict and objective.
+
+Group 1: Visual Grounding
+
+visual_references_present: Does the CoT explicitly mention specific visual elements?
+visual_claims_accurate: Are all visual descriptions factually correct?
+visual_input_necessary: Could this question be answered without seeing the image?
+
+Group 2: Reasoning Quality
+
+reasoning_present: Is there actual step-by-step reasoning rather than a direct answer?
+logical_steps_valid: Do the reasoning steps logically follow from each other?
+reaches_correct_conclusion: Does the CoT reasoning lead to the correct answer?
+
+Group 3: Shared Higher-Order Behaviors
+
+planning_present: Does it break the problem into sub-steps or make a plan upfront?
+hypothesis_testing: Does it propose multiple possibilities and test them?
+self_correction: Does it revise or correct earlier claims?
+uncertainty_acknowledgment: Does it explicitly note ambiguity or uncertainty?
+evidence_citation: Does it reference specific visual evidence to support claims?
+confidence_calibration: Does the model's confidence match the certainty of its reasoning?
+self_awareness: Does it recognize the limits of what can be determined from the image?
+goal_tracking: Does it maintain and reference sub-goals in multi-step problems?
+knowledge_alignment: Does it invoke appropriate domain schemas to interpret visual content?
+
+Group 4: Reasoning Types
+
+spatial_reasoning, counting_reasoning, compositional_reasoning, causal_reasoning, mathematical_reasoning, temporal_reasoning.
+Multiple can be true.
+
+Group 5: Failure Modes
+
+visual_hallucination: Claims objects or attributes not present in the image.
+visual_neglect: Misses critical visual details that are present.
+logical_failure: Reasoning steps don't logically connect.
+language_bias: Over-relies on text priors, ignores actual visual content.
+post_hoc_rationalization: Reasoning appears reverse-engineered from the answer.
+shortcut: Skips important reasoning steps or bypasses visual analysis.
+lucky_guess: Reaches correct answer but reasoning is wrong.
+For all failure modes, true means the failure occurred.
+
+Group 6: Summary Metrics
+
+complexity_score (1-5), reasoning_direction (forward/backward/mixed), efficiency (concise/verbose/insufficient), overall_quality (strong/flawed/poor), would_make_good_judge (true/false).
+
+Evaluate each metric independently. Be strict: only mark true if clearly demonstrated. For failure modes, false means the failure did not occur. Respond with valid JSON only.

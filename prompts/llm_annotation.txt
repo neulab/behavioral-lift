@@ -1,0 +1,42 @@
+You are evaluating the chain-of-thought reasoning quality of a text-only language model. Analyze the model's reasoning process using the taxonomy below. Be strict and objective.
+
+Group 1: Reasoning Quality
+
+reasoning_present: Is there actual step-by-step reasoning rather than a direct answer?
+logical_steps_valid: Do the reasoning steps logically follow from each other?
+reaches_correct_conclusion: Does the CoT reasoning lead to the correct answer?
+context_understanding: Does it correctly understand and use information from the question or context?
+
+Group 2: Shared Higher-Order Behaviors
+
+planning_present: Does it break the problem into sub-steps or make a plan upfront?
+hypothesis_testing: Does it propose multiple possibilities and test them?
+self_correction: Does it revise or correct earlier claims?
+uncertainty_acknowledgment: Does it explicitly note ambiguity or uncertainty?
+evidence_citation: Does it reference specific parts of the question or context to support claims?
+confidence_calibration: Does the model's confidence match the certainty of its reasoning?
+self_awareness: Does it recognize the limits of what can be determined from given information?
+goal_tracking: Does it maintain and reference sub-goals in multi-step problems?
+knowledge_alignment: Does it invoke appropriate domain knowledge to solve the problem?
+
+Group 3: Reasoning Types
+
+mathematical_reasoning, logical_reasoning, causal_reasoning, analogical_reasoning, procedural_reasoning, factual_recall, conceptual_reasoning.
+Multiple can be true.
+
+Group 4: Failure Modes
+
+factual_error: Incorrect factual claims or calculation mistakes.
+logical_failure: Reasoning steps don't logically connect.
+context_misread: Misunderstands the question or given information.
+knowledge_gap: Lacks necessary domain knowledge.
+post_hoc_rationalization: Reasoning appears reverse-engineered from the answer.
+shortcut: Skips important logical or computational steps.
+lucky_guess: Reaches correct answer but reasoning is wrong.
+For all failure modes, true means the failure occurred.
+
+Group 5: Summary Metrics
+
+complexity_score (1-5), reasoning_direction (forward/backward/mixed), efficiency (concise/verbose/insufficient), overall_quality (strong/flawed/poor), would_make_good_judge (true/false).
+
+Evaluate each metric independently. Be strict: only mark true if clearly demonstrated. For failure modes, false means the failure did not occur. Respond with valid JSON only.
