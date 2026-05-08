@@ -22,6 +22,12 @@ $$\text{Lift}(b) = P(\text{correct} \mid b) - P(\text{correct} \mid \neg b)$$
 
 A behavior has high lift when responses containing it are more likely to be correct than responses without it. High prevalence alone says little: a behavior can appear everywhere and predict nothing.
 
+<p align="center">
+  <img src="assets/fig2_behavioral_lift.png" width="700"/>
+</p>
+
+Behaviors differ sharply in how much they predict correctness. Confidence calibration, knowledge alignment, and self-awareness have high positive lift, while uncertainty acknowledgment is much weaker despite being strongly amplified by thinking training.
+
 ## Key Takeaways
 
 **Amplification ≠ value.** Thinking training reliably amplifies correction, search, and uncertainty behaviors: self-correction, hypothesis testing, and uncertainty acknowledgment. But the highest-lift behaviors are different: confidence calibration, knowledge alignment, and self-awareness about missing information. The things models learn to do more of are not always the things that matter most.
@@ -40,15 +46,17 @@ examples/      Small LLM/VLM sample annotation files
 assets/        README figures
 ```
 
-The full annotation files will be hosted on Hugging Face Datasets and linked here.
+The full annotation dataset is available on Hugging Face: [neulab/behavioral-lift](https://huggingface.co/datasets/neulab/behavioral-lift)
+
+```python
+from datasets import load_dataset
+
+ds = load_dataset("neulab/behavioral-lift")
+llm = ds["llm"]   # 8,282 rows
+vlm = ds["vlm"]   # 7,000 rows
+```
 
 ## Running The Metric Scripts
-
-Install dependencies if needed:
-
-```bash
-pip install -r requirements.txt
-```
 
 Compute Behavioral Lift on the sample LLM annotations:
 
@@ -78,7 +86,7 @@ python3 metrics/recovery_rate.py \
   --output results/sample_vlm_recovery_rate.csv
 ```
 
-You can group results by metadata fields such as `model`, `benchmark`, `modality`, or `training_type`:
+You can group results by metadata fields such as `model`, `benchmark`, or `modality`:
 
 ```bash
 python3 metrics/behavioral_lift.py \
