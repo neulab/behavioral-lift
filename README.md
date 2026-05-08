@@ -34,9 +34,8 @@ A behavior has high lift when responses containing it are more likely to be corr
 
 ```
 prompts/          Annotation prompts for LLM and VLM traces
-schemas/          Behavior and failure-mode schemas
-src/              Metric code for Behavioral Lift, Recovery Rate, and analysis
-scripts/          Reproduction scripts for tables and figures
+taxonomy/          Behavior and failure-mode definition and schemas
+metrics/              Metric code for Behavioral Lift, Recovery Rate, and analysis
 data/             Metadata and sample annotations
 assets/           README figures
 ```
