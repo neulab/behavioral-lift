@@ -46,6 +46,8 @@ examples/      Small LLM/VLM sample annotation files
 assets/        README figures
 ```
 
+Model responses were collected using [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) for LLMs and [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval) for VLMs under standardized chain-of-thought evaluation settings.
+
 The full annotation dataset is available on Hugging Face: [neulab/behavioral-lift](https://huggingface.co/datasets/neulab/behavioral-lift)
 
 ```python
