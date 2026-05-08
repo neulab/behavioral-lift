@@ -9,7 +9,7 @@ We study a simple question:
 Our answer is **not always**. Thinking training makes traces look more deliberative, but the most amplified behaviors are not the ones most associated with correctness.
 
 <p align="center">
-  <img src="assets/fig1_amplification_vs_lift.png" width="700"/>
+  <img src="assets/amplification_mismatch.png" width="700"/>
 </p>
 
 The top-right quadrant is empty: no behavior is both strongly amplified by thinking training **and** strongly associated with correctness. Thinking models pour effort into self-correction, hypothesis testing, and uncertainty acknowledgment — visible deliberation. But the behaviors with the highest lift (confidence calibration, knowledge alignment, recognizing insufficient information) are quieter, and thinking training barely moves them.
