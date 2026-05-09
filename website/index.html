@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Not All Thinking Helps</title>
+<meta name="description" content="Which reasoning behaviors predict correctness? Thinking models amplify visible deliberation, but not the behaviors most associated with correctness.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fafaf9;
+  --fg:#1c1917;
+  --fg-secondary:#57534e;
+  --fg-tertiary:#a8a29e;
+  --accent:#2d6a4f;
+  --accent-light:#d8f3dc;
+  --warm:#9c4221;
+  --warm-light:#fed7aa;
+  --border:#e7e5e4;
+  --card-bg:#ffffff;
+  --serif:'Source Serif 4',Georgia,serif;
+  --sans:'Inter',-apple-system,system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --max-w:820px;
+  --section-gap:6rem;
+}
+html{font-size:17px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:var(--sans);
+  color:var(--fg);
+  background:var(--bg);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* --- Layout --- */
+.container{max-width:var(--max-w);margin:0 auto;padding:0 1.5rem}
+section{padding:var(--section-gap) 0}
+section+section{padding-top:0}
+
+/* --- Hero --- */
+.hero{
+  padding:5rem 0 3.5rem;
+  text-align:center;
+}
+.hero-venue{
+  display:inline-block;
+  font-family:var(--sans);
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--accent);
+  background:var(--accent-light);
+  padding:.35rem .9rem;
+  border-radius:100px;
+  margin-bottom:1.5rem;
+}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(2rem,5vw,3.1rem);
+  font-weight:700;
+  line-height:1.15;
+  letter-spacing:-.02em;
+  color:var(--fg);
+  margin-bottom:.6rem;
+}
+.hero h2{
+  font-family:var(--serif);
+  font-size:clamp(1.1rem,2.5vw,1.45rem);
+  font-weight:400;
+  font-style:italic;
+  color:var(--fg-secondary);
+  margin-bottom:1.8rem;
+}
+.authors{
+  font-size:.95rem;
+  color:var(--fg-secondary);
+  margin-bottom:.35rem;
+}
+.authors a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--border)}
+.authors a:hover{border-color:var(--fg)}
+.affiliation{
+  font-size:.85rem;
+  color:var(--fg-tertiary);
+  margin-bottom:2rem;
+}
+.hero-hook{
+  font-family:var(--serif);
+  font-size:1.15rem;
+  font-style:italic;
+  color:var(--fg-secondary);
+  max-width:600px;
+  margin:0 auto 2.5rem;
+  line-height:1.6;
+}
+.btn-row{
+  display:flex;
+  gap:.6rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:2.5rem;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-family:var(--sans);
+  font-size:.85rem;
+  font-weight:500;
+  text-decoration:none;
+  padding:.55rem 1.2rem;
+  border-radius:8px;
+  transition:all .2s ease;
+}
+.btn-primary{
+  background:var(--fg);
+  color:#fff;
+}
+.btn-primary:hover{background:#292524}
+.btn-secondary{
+  background:var(--card-bg);
+  color:var(--fg);
+  border:1px solid var(--border);
+}
+.btn-secondary:hover{border-color:#a8a29e;background:#f5f5f4}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+
+/* --- Stats strip --- */
+.stats{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:1rem 2rem;
+  padding:1.2rem 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.stat{
+  font-size:.85rem;
+  color:var(--fg-secondary);
+  white-space:nowrap;
+}
+.stat strong{
+  font-weight:600;
+  color:var(--fg);
+  font-variant-numeric:tabular-nums;
+}
+
+/* --- Section headings --- */
+.section-label{
+  font-family:var(--sans);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--fg-tertiary);
+  margin-bottom:.6rem;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(1.4rem,3vw,1.85rem);
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:-.01em;
+  margin-bottom:1rem;
+}
+
+/* --- Abstract / prose --- */
+.prose{
+  font-family:var(--serif);
+  font-size:1.02rem;
+  line-height:1.8;
+  color:var(--fg-secondary);
+}
+.prose strong{color:var(--fg);font-weight:500}
+
+/* --- Figures --- */
+.figure-wrap{
+  margin:2.5rem 0;
+  text-align:center;
+}
+.figure-wrap.hero-figure{
+  max-width:680px;
+  margin:0 auto 0;
+}
+.figure-wrap img{
+  width:100%;
+  height:auto;
+  border-radius:6px;
+  border:1px solid var(--border);
+}
+.figure-wrap.no-border img{
+  border:none;
+}
+figcaption{
+  font-size:.8rem;
+  color:var(--fg-tertiary);
+  margin-top:.7rem;
+  line-height:1.5;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+}
+figcaption strong{color:var(--fg-secondary);font-weight:500}
+
+/* --- Finding cards --- */
+.findings-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+.finding-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.4rem 1.5rem;
+  transition:border-color .2s;
+}
+.finding-card:hover{border-color:#d6d3d1}
+.finding-card h3{
+  font-family:var(--sans);
+  font-size:.82rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  margin-bottom:.55rem;
+}
+.finding-card h3.green{color:var(--accent)}
+.finding-card h3.warm{color:var(--warm)}
+.finding-card p{
+  font-family:var(--serif);
+  font-size:.92rem;
+  line-height:1.65;
+  color:var(--fg-secondary);
+}
+
+/* --- Taxonomy table --- */
+.table-wrap{margin:2rem 0}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.88rem;
+}
+thead th{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.72rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--fg-tertiary);
+  text-align:left;
+  padding:.7rem .9rem;
+  border-bottom:2px solid var(--border);
+}
+tbody td{
+  padding:.65rem .9rem;
+  border-bottom:1px solid var(--border);
+  color:var(--fg-secondary);
+  vertical-align:top;
+}
+tbody td:first-child{
+  font-weight:500;
+  color:var(--fg);
+  white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#fafaf8}
+
+/* --- Lift table --- */
+.lift-table{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+  margin:2rem 0;
+}
+.lift-table table{margin:0}
+.lift-table thead th{background:#fafaf9}
+.lift-table tbody td{font-variant-numeric:tabular-nums}
+.lift-val{font-family:var(--mono);font-size:.84rem;font-weight:500}
+.lift-pos{color:var(--accent)}
+.lift-neg{color:var(--warm)}
+
+/* --- Metric blocks --- */
+.metric-block{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:1.6rem 1.8rem;
+  margin:1.2rem 0;
+}
+.metric-block h3{
+  font-family:var(--sans);
+  font-size:.95rem;
+  font-weight:600;
+  margin-bottom:.8rem;
+}
+.metric-formula{
+  font-family:var(--mono);
+  font-size:.88rem;
+  background:#f5f5f4;
+  padding:.7rem 1rem;
+  border-radius:6px;
+  margin-bottom:.8rem;
+  overflow-x:auto;
+  color:var(--fg);
+}
+.metric-block p{
+  font-size:.88rem;
+  color:var(--fg-secondary);
+  line-height:1.65;
+}
+
+/* --- Closing --- */
+.closing{
+  padding-top:0;
+}
+.closing-text{
+  font-family:var(--serif);
+  font-size:1.05rem;
+  line-height:1.75;
+  color:var(--fg-secondary);
+  max-width:680px;
+}
+
+/* --- Citation --- */
+.citation-block{
+  background:#f5f5f4;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:1.2rem 1.4rem;
+  margin-top:1.5rem;
+  position:relative;
+}
+.citation-block pre{
+  font-family:var(--mono);
+  font-size:.78rem;
+  line-height:1.6;
+  color:var(--fg-secondary);
+  white-space:pre-wrap;
+  word-break:break-all;
+}
+.copy-btn{
+  position:absolute;
+  top:.8rem;
+  right:.8rem;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:.3rem .6rem;
+  font-size:.72rem;
+  font-family:var(--sans);
+  font-weight:500;
+  cursor:pointer;
+  color:var(--fg-secondary);
+  transition:all .15s;
+}
+.copy-btn:hover{border-color:#a8a29e;color:var(--fg)}
+
+/* --- Footer --- */
+footer{
+  text-align:center;
+  padding:3rem 0 2.5rem;
+  font-size:.8rem;
+  color:var(--fg-tertiary);
+  border-top:1px solid var(--border);
+}
+footer a{color:var(--fg-secondary);text-decoration:none}
+footer a:hover{color:var(--fg)}
+
+/* --- Divider --- */
+.divider{
+  width:40px;
+  height:2px;
+  background:var(--border);
+  margin:3.5rem auto;
+}
+
+/* --- Responsive --- */
+/* --- Scroll fade --- */
+.fade-in{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.fade-in.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:700px){
+  .findings-grid{grid-template-columns:1fr}
+  .hero{padding:3rem 0 2.5rem}
+  section{padding:4rem 0}
+  .stats{gap:.6rem 1.2rem}
+  .metric-block{padding:1.2rem 1.3rem}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fade-in{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-venue">COLM 2026</div>
+    <h1>Not All Thinking Helps</h1>
+    <h2>Which Reasoning Behaviors Predict Correctness?</h2>
+    <div class="authors">
+      <a href="https://nyandwi.com" target="_blank">Jean de Dieu Nyandwi</a>,
+      <a href="https://leenamathur.com" target="_blank">Leena Mathur</a>,
+      <a href="https://yonatanbisk.com" target="_blank">Yonatan Bisk</a>,
+      <a href="https://phontron.com" target="_blank">Graham Neubig</a>
+    </div>
+    <div class="affiliation">Carnegie Mellon University</div>
+
+    <p class="hero-hook">
+      Thinking models amplify visible deliberation, but not the behaviors most associated with correctness.
+    </p>
+
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Paper
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/neulab/behavioral-lift" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        Code
+      </a>
+      <a class="btn btn-secondary" href="https://huggingface.co/datasets/neulab/behavioral-lift" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0018 0V5"/><path d="M3 12a9 3 0 0018 0"/></svg>
+        Dataset
+      </a>
+      <a class="btn btn-secondary" href="#citation">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h6V5l7 7-7 7v-4H6V9z"/></svg>
+        Cite
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong>15,282</strong> traces</div>
+      <div class="stat"><strong>15</strong> models</div>
+      <div class="stat"><strong>6</strong> benchmarks</div>
+      <div class="stat"><strong>9</strong> cross-modal behaviors</div>
+      <div class="stat"><strong>2</strong> metrics</div>
+    </div>
+  </div>
+</header>
+
+<!-- Main figure -->
+<section>
+  <div class="container">
+    <figure class="figure-wrap hero-figure no-border fade-in">
+      <img src="figures/fig_irony_v7-1.png" alt="Scatter plot: amplification vs behavioral lift. The top-right quadrant is empty — no behavior is both highly amplified and highly useful." loading="lazy">
+      <figcaption>
+        <strong>Figure 1.</strong> Amplification by thinking training (x-axis) vs. Behavioral Lift (y-axis), averaged across VLMs and LLMs. The top-right quadrant is empty: no behavior is both strongly amplified and strongly associated with correctness.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Abstract -->
+<section>
+  <div class="container">
+    <div class="section-label">Abstract</div>
+    <p class="prose">
+      We ask whether reasoning-oriented "thinking" training amplifies the behaviors that are actually associated with correct answers. Across 15 open-weight LLMs and VLMs, 6 benchmarks, and 15,282 annotated reasoning traces, we separate behavioral prevalence from behavioral value using <strong>Behavioral Lift</strong>: how much correctness changes when a behavior appears in a trace. We find a consistent mismatch. Thinking training strongly amplifies self-correction, hypothesis testing, and uncertainty acknowledgment, while the highest-lift behaviors are confidence calibration, knowledge alignment, and self-awareness. The result: traces can look more deliberative without becoming more reliable.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Key Findings -->
+<section>
+  <div class="container">
+    <div class="section-label">Key Findings</div>
+    <h2 class="section-title">Amplification is not lift</h2>
+    <div class="findings-grid fade-in">
+      <div class="finding-card">
+        <h3 class="warm">Amplification mismatch</h3>
+        <p>Thinking training amplifies self-correction, hypothesis testing, and uncertainty acknowledgment, but leaves confidence calibration and knowledge alignment largely unchanged.</p>
+      </div>
+      <div class="finding-card">
+        <h3 class="green">Highest-lift behaviors</h3>
+        <p>Confidence calibration has the strongest lift: +72.2% for VLMs and +79.6% for LLMs. Knowledge alignment is also high: +53.7% for VLMs and +80.3% for LLMs.</p>
+      </div>
+      <div class="finding-card">
+        <h3 class="warm">Calibration is not hedging</h3>
+        <p>Uncertainty acknowledgment is amplified by thinking training, but has negative lift: &minus;16.1% for VLMs and &minus;13.9% for LLMs. A model saying "maybe" is not the same as a calibrated model.</p>
+      </div>
+      <div class="finding-card">
+        <h3 class="green">Thinking helps through recovery</h3>
+        <p>Thinking models recover 2&ndash;3&times; better on extended-reasoning tasks: VisualPuzzles 23.0% vs 8.4%, MATH-500 40.8% vs 17.8%, MMLU-Pro 16.8% vs 6.3%. But on LogiQA2, instruct models recover better: 24.5% vs 11.1%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Prevalence -->
+<section>
+  <div class="container">
+    <div class="section-label">Prevalence</div>
+    <h2 class="section-title">What thinking training amplifies</h2>
+    <p class="prose" style="margin-bottom:.5rem">
+      Thinking models produce far more self-correction, hypothesis testing, and uncertainty acknowledgment than instruct models. But prevalence alone says little about value.
+    </p>
+    <figure class="figure-wrap fade-in">
+      <img src="figures/fig1_metacognitive_gap.png" alt="Bar chart comparing behavior prevalence between thinking and instruct models for VLMs and LLMs." loading="lazy">
+      <figcaption>
+        <strong>Figure 2.</strong> Behavior prevalence (%) in thinking vs. instruct model traces. Self-correction, hypothesis testing, and uncertainty acknowledgment show the largest gaps.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Behavioral Lift -->
+<section>
+  <div class="container">
+    <div class="section-label">Behavioral Lift</div>
+    <h2 class="section-title">Which behaviors predict correctness</h2>
+    <p class="prose" style="margin-bottom:.5rem">
+      Behavioral Lift measures how much correctness changes when a behavior is present vs. absent. The most amplified behaviors are not the ones with the highest lift.
+    </p>
+    <figure class="figure-wrap fade-in">
+      <img src="figures/fig2_behavioral_lift.png" alt="Horizontal bar chart showing Behavioral Lift for each behavior across VLMs and LLMs." loading="lazy">
+      <figcaption>
+        <strong>Figure 3.</strong> Behavioral Lift (%) for each behavior. Confidence calibration, self-awareness, and knowledge alignment have the highest positive lift; uncertainty acknowledgment has negative lift.
+      </figcaption>
+    </figure>
+
+    <div class="lift-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Behavior</th>
+            <th style="text-align:right">VLM Lift</th>
+            <th style="text-align:right">LLM Lift</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Confidence calibration</td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+72.2</span></td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+79.6</span></td>
+          </tr>
+          <tr>
+            <td>Knowledge alignment</td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+53.7</span></td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+80.3</span></td>
+          </tr>
+          <tr>
+            <td>Self-awareness</td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+62.0</span></td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+52.7</span></td>
+          </tr>
+          <tr>
+            <td>Self-correction</td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+20.1</span></td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+12.4</span></td>
+          </tr>
+          <tr>
+            <td>Hypothesis testing</td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+1.0</span></td>
+            <td style="text-align:right"><span class="lift-val lift-pos">+1.0</span></td>
+          </tr>
+          <tr>
+            <td>Uncertainty acknowledgment</td>
+            <td style="text-align:right"><span class="lift-val lift-neg">&minus;16.1</span></td>
+            <td style="text-align:right"><span class="lift-val lift-neg">&minus;13.9</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Recovery -->
+<section>
+  <div class="container">
+    <div class="section-label">Recovery</div>
+    <h2 class="section-title">Thinking helps most through recovery</h2>
+    <p class="prose" style="margin-bottom:.5rem">
+      Thinking models excel when tasks reward extended computation and recovery from intermediate mistakes. On pattern-matching tasks, instruct models can perform comparably.
+    </p>
+    <figure class="figure-wrap fade-in">
+      <img src="figures/fig3_recovery_spectrum.png" alt="Line chart showing recovery rate across benchmarks for thinking vs instruct models." loading="lazy">
+      <figcaption>
+        <strong>Figure 4.</strong> Recovery Rate across benchmarks. Thinking models recover 2&ndash;3&times; better on VisualPuzzles, MATH-500, and MMLU-Pro, but not on LogiQA2 where instruct models recover better.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Metrics -->
+<section>
+  <div class="container">
+    <div class="section-label">Metrics</div>
+    <h2 class="section-title">How we measure</h2>
+    <div class="metric-block">
+      <h3>Behavioral Lift</h3>
+      <div class="metric-formula">Lift(b) = P(correct | b = true) &minus; P(correct | b = false)</div>
+      <p>Behavioral Lift separates behaviors that are frequent from behaviors that are useful. Positive lift means responses with the behavior are more likely to be correct; negative lift means the behavior is associated with lower accuracy. Lift is descriptive, not causal.</p>
+    </div>
+    <div class="metric-block">
+      <h3>Recovery Rate</h3>
+      <div class="metric-formula">Recovery = P(correct | any failure mode = true)</div>
+      <p>Recovery Rate measures whether a model can still reach the correct answer after a detected reasoning failure.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Taxonomy -->
+<section>
+  <div class="container">
+    <div class="section-label">Taxonomy</div>
+    <h2 class="section-title">9 reasoning behaviors</h2>
+    <p class="prose" style="margin-bottom:.5rem">
+      We define a shared behavioral taxonomy whose core behaviors are defined identically for LLM and VLM traces.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Behavior</th>
+            <th>Definition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Planning</td><td>Breaks the problem into explicit sub-steps.</td></tr>
+          <tr><td>Goal tracking</td><td>Tracks progress toward intermediate or final goals.</td></tr>
+          <tr><td>Hypothesis testing</td><td>Considers alternatives, cases, or interpretations.</td></tr>
+          <tr><td>Self-correction</td><td>Revises or corrects a previous step or claim.</td></tr>
+          <tr><td>Uncertainty ack.</td><td>Expresses doubt, ambiguity, or confusion.</td></tr>
+          <tr><td>Confidence calib.</td><td>Certainty tracks the strength of reasoning.</td></tr>
+          <tr><td>Self-awareness</td><td>Recognizes missing information or limits of support.</td></tr>
+          <tr><td>Evidence citation</td><td>Grounds claims in prompt evidence or constraints.</td></tr>
+          <tr><td>Knowledge alignment</td><td>Uses the appropriate domain facts or framework.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Scaling -->
+<section>
+  <div class="container">
+    <div class="section-label">Scaling</div>
+    <h2 class="section-title">The pattern persists at scale</h2>
+    <p class="prose" style="margin-bottom:.5rem">
+      The amplification&ndash;lift mismatch holds across model sizes. Scaling does not close the gap.
+    </p>
+    <figure class="figure-wrap fade-in">
+      <img src="figures/fig_scaling_vlm.png" alt="Line chart showing behavior prevalence across Qwen3-VL model sizes for thinking vs instruct." loading="lazy">
+      <figcaption>
+        <strong>Figure 5.</strong> Behavior prevalence across Qwen3-VL model sizes (2B&ndash;32B). Amplified behaviors stay amplified; largely unchanged behaviors remain unchanged. The mismatch is stable.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Closing -->
+<section class="closing">
+  <div class="container">
+    <p class="closing-text">
+      Improving reasoning models requires more than making them think longer. Future training and evaluation should reward calibrated confidence, grounded use of evidence, appropriate domain knowledge, and recovery when reasoning goes wrong.
+    </p>
+  </div>
+</section>
+
+<!-- Citation -->
+<section id="citation">
+  <div class="container">
+    <div class="section-label">Citation</div>
+    <div class="citation-block">
+      <button class="copy-btn" onclick="copyBib()" id="copyBtn">Copy</button>
+      <pre>@article{nyandwi2026notallthinking,
+  title   = {Not All Thinking Helps: Which Reasoning
+             Behaviors Predict Correctness?},
+  author  = {Nyandwi, Jean de Dieu and Mathur, Leena
+             and Bisk, Yonatan and Neubig, Graham},
+  year    = {2026}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="https://github.com/neulab/behavioral-lift" target="_blank">NeuLab</a> &middot; Carnegie Mellon University
+  </div>
+</footer>
+
+<script>
+function copyBib(){
+  const t=document.querySelector('.citation-block pre').textContent;
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('copyBtn');
+    b.textContent='Copied';
+    setTimeout(()=>b.textContent='Copy',2000);
+  });
+}
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.12});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
