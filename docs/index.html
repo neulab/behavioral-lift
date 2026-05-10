@@ -48,7 +48,7 @@ a{color:inherit}
 .btn.primary:hover{background:#AD694F;border-color:#AD694F}
 .btn svg{width:15px;height:15px;flex:0 0 auto}
 .hero-copy{text-align:center;max-width:900px;margin:0 auto}
-h1{font-family:var(--display);font-size:clamp(3rem,7.4vw,6.25rem);line-height:.91;letter-spacing:-.06em;font-weight:900;color:#171615;margin:0 auto 18px;max-width:1080px}
+h1{font-family:var(--display);font-size:clamp(3rem,7.1vw,6rem);line-height:.94;letter-spacing:-.038em;font-weight:800;color:#171615;margin:0 auto 18px;max-width:1120px}
 .subtitle{font-family:var(--serif);font-size:clamp(1.28rem,2.2vw,1.75rem);line-height:1.2;color:var(--marker);font-style:italic;margin-bottom:22px}
 .hook{font-family:var(--serif);font-size:1.22rem;line-height:1.48;color:var(--muted);max-width:680px;margin:0 auto 22px}
 .authors{font-size:.93rem;color:var(--muted);margin-bottom:3px}
@@ -121,6 +121,8 @@ h3{font-size:.92rem;letter-spacing:.045em;text-transform:uppercase;color:var(--m
 /* Scaling */
 .scale-grid{display:grid;grid-template-columns:1fr;gap:30px;align-items:start;max-width:980px;margin:24px auto 0}
 .scale-grid .figure{background:#fff}
+.paired-figures{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:24px}
+.paired-figures .figure{background:#fff}
 
 /* Tables */
 .table-panel{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff;margin-top:18px}
@@ -148,7 +150,7 @@ tr:last-child td{border-bottom:0}
 footer{padding:24px 0;text-align:center;font-size:.82rem;color:var(--faint)}
 
 @media(max-width:980px){
-  .two-col,.two-col.reverse,.overview-grid,.metric-grid,.scale-grid{grid-template-columns:1fr}
+  .two-col,.two-col.reverse,.overview-grid,.metric-grid,.scale-grid,.paired-figures{grid-template-columns:1fr}
   .section-head{grid-template-columns:1fr;gap:6px}
   .hero-figure{max-width:780px;margin:8px auto 0}
   .taxonomy-grid{grid-template-columns:repeat(2,1fr)}
@@ -159,7 +161,7 @@ footer{padding:24px 0;text-align:center;font-size:.82rem;color:var(--faint)}
   .hero{padding:24px 0 20px}
   .topline{display:block;margin-bottom:26px}
   .nav{justify-content:flex-start;margin-top:14px}
-  h1{font-size:2.85rem;letter-spacing:-.045em}
+  h1{font-size:2.85rem;letter-spacing:-.032em}
   section{padding:38px 0}
   .callout-row,.taxonomy-grid{grid-template-columns:1fr}
   .stat{padding:7px 12px}
@@ -312,17 +314,29 @@ footer{padding:24px 0;text-align:center;font-size:.82rem;color:var(--faint)}
   </section>
 
   <section>
-    <div class="wrap two-col">
-      <div class="text-block">
-        <div class="eyebrow">Robustness</div>
-        <h2>The lift ranking holds within benchmarks.</h2>
-        <p class="lead">The mismatch survives within individual benchmarks. Confidence calibration and knowledge alignment remain high-lift across individual tasks, while uncertainty acknowledgment stays low or negative.</p>
-        <p class="small-note">We also validate the ranking with same-question controls, hidden-state probes, and prompting interventions in the paper.</p>
+    <div class="wrap">
+      <div class="two-col">
+        <div class="text-block">
+          <div class="eyebrow">Robustness</div>
+          <h2>The lift ranking holds across benchmarks and models.</h2>
+          <p class="lead">The mismatch survives within individual benchmarks. Confidence calibration and knowledge alignment remain high-lift across tasks, while uncertainty acknowledgment stays low or negative. Per-model lift shows the same pattern across model families.</p>
+          <p class="small-note">We also validate the ranking with same-question controls, hidden-state probes, and prompting interventions in the paper.</p>
+        </div>
+        <figure class="figure">
+          <img src="figures/fig_lift_heatmap_all_benchmarks.png" alt="Behavioral Lift across all LLM and VLM benchmarks.">
+          <figcaption class="caption"><strong>The same broad ranking appears within benchmarks:</strong> high-lift behaviors stay high across LLM and VLM tasks; amplified uncertainty remains low-lift.</figcaption>
+        </figure>
       </div>
-      <figure class="figure">
-        <img src="figures/fig_lift_heatmap_benchmark.png" alt="Behavioral Lift per benchmark heatmap.">
-        <figcaption class="caption"><strong>The same broad ranking appears within benchmarks:</strong> high-lift behaviors stay high; amplified uncertainty remains low-lift.</figcaption>
-      </figure>
+      <div class="paired-figures">
+        <figure class="figure">
+          <img src="figures/fig_lift_per_model_vlm.png" alt="Behavioral Lift per VLM model.">
+          <figcaption class="caption"><strong>VLM per-model lift:</strong> calibration, grounding, and self-awareness remain stronger correctness signals than visible deliberation.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="figures/fig_lift_per_model_llm.png" alt="Behavioral Lift per LLM model.">
+          <figcaption class="caption"><strong>LLM per-model lift:</strong> the same lift ordering appears across language-model families.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -342,6 +356,25 @@ footer{padding:24px 0;text-align:center;font-size:.82rem;color:var(--faint)}
           <div class="callout negative"><span class="num">11.1 vs 24.5</span><span class="label">LogiQA2 reverses the pattern</span></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two-col">
+      <div class="text-block">
+        <div class="eyebrow">Recovery Behaviors</div>
+        <h2>Which behaviors predict recovery from failures?</h2>
+        <p class="lead">Among traces with at least one detected failure, recovery is highest when the trace shows confidence calibration, knowledge alignment, self-correction, or self-awareness. Some frequent behaviors, including planning and evidence citation, add little recovery signal in this conditional view.</p>
+        <div class="callout-row">
+          <div class="callout positive"><span class="num">+57pp</span><span class="label">recovery gap with confidence calibration</span></div>
+          <div class="callout positive"><span class="num">+47pp</span><span class="label">recovery gap with knowledge alignment</span></div>
+          <div class="callout think"><span class="num">+39pp</span><span class="label">recovery gap with self-correction</span></div>
+        </div>
+      </div>
+      <figure class="figure">
+        <img src="figures/fig_recovery_conditional.png" alt="Recovery rate conditional on behavior presence among traces with at least one detected failure.">
+        <figcaption class="caption"><strong>Recovery depends on behavior type:</strong> calibration and grounding predict recovery after detected failures; planning and evidence citation add little recovery signal.</figcaption>
+      </figure>
     </div>
   </section>
 
