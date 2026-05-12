@@ -118,6 +118,23 @@ h3{font-size:.92rem;letter-spacing:.045em;text-transform:uppercase;color:var(--m
 .takeaway strong{display:block;font-size:1rem;color:var(--text);margin-bottom:6px}
 .takeaway p{font-size:.92rem;color:var(--muted);line-height:1.55}
 
+/* Trace examples */
+.sample-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+.sample{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px}
+.sample.calibration{border-top:4px solid var(--positive)}
+.sample.uncertainty{border-top:4px solid var(--negative)}
+.sample-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.sample-tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--marker)}
+.sample-status{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--text);padding:4px 8px;border-radius:999px;background:var(--ivory);border:1px solid var(--grid);white-space:nowrap}
+.sample h3{font-family:var(--serif);font-size:1.22rem;line-height:1.2;letter-spacing:-.01em;text-transform:none;color:#302D2B;margin-bottom:12px}
+.sample-question{font-size:.9rem;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.trace{border-left:3px solid var(--grid);padding-left:12px;font-family:var(--serif);font-size:.98rem;line-height:1.62;color:var(--text)}
+.trace p{margin-bottom:10px}
+.trace p:last-child{margin-bottom:0}
+.highlight-positive{background:rgba(122,155,118,.16);color:#45603F;padding:1px 4px;border-radius:4px}
+.highlight-negative{background:rgba(196,122,106,.16);color:#8E4E43;padding:1px 4px;border-radius:4px}
+.sample-foot{margin-top:13px;padding-top:10px;border-top:1px solid var(--grid);font-size:.79rem;color:var(--faint)}
+
 /* Scaling */
 .scale-grid{display:grid;grid-template-columns:1fr;gap:30px;align-items:start;max-width:980px;margin:24px auto 0}
 .scale-grid .figure{background:#fff}
@@ -150,7 +167,7 @@ tr:last-child td{border-bottom:0}
 footer{padding:24px 0;text-align:center;font-size:.82rem;color:var(--faint)}
 
 @media(max-width:980px){
-  .two-col,.two-col.reverse,.overview-grid,.metric-grid,.scale-grid,.paired-figures{grid-template-columns:1fr}
+  .two-col,.two-col.reverse,.overview-grid,.metric-grid,.scale-grid,.paired-figures,.sample-grid{grid-template-columns:1fr}
   .section-head{grid-template-columns:1fr;gap:6px}
   .hero-figure{max-width:780px;margin:8px auto 0}
   .taxonomy-grid{grid-template-columns:repeat(2,1fr)}
@@ -396,6 +413,49 @@ footer{padding:24px 0;text-align:center;font-size:.82rem;color:var(--faint)}
           <img src="figures/fig_scaling_llm.png" alt="Scaling analysis for Qwen-family language models.">
           <figcaption class="caption"><strong>LLM scaling:</strong> Qwen-family language models show the same broad pattern on MATH-500.</figcaption>
         </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Trace Examples</div>
+        <div>
+          <h2>Calibration and uncertainty leave very different fingerprints in a trace.</h2>
+          <p class="lead">A useful trace becomes more confident when independent checks agree. A visibly uncertain trace can still fail when doubt never resolves into better reasoning.</p>
+        </div>
+      </div>
+      <div class="sample-grid">
+        <article class="sample calibration">
+          <div class="sample-head">
+            <div class="sample-tag">Confidence Calibration</div>
+            <div class="sample-status">Correct</div>
+          </div>
+          <h3>Confidence rises after converging checks.</h3>
+          <p class="sample-question"><strong>Question:</strong> If 40 calories is 2% of a person's daily requirement, what is the full daily requirement?</p>
+          <div class="trace">
+            <p>The trace solves <em>0.02x = 40</em>, giving <em>x = 2000</em>.</p>
+            <p>It then checks the result in percentage terms: 1% is 20, so 100% is 2000.</p>
+            <p><span class="highlight-positive">Both methods give me 2000. That makes me more confident.</span></p>
+          </div>
+          <div class="sample-foot">OLMo3-7B-Think &middot; MATH-500 &middot; Doc 38</div>
+        </article>
+
+        <article class="sample uncertainty">
+          <div class="sample-head">
+            <div class="sample-tag">Uncertainty Acknowledgment</div>
+            <div class="sample-status">Incorrect</div>
+          </div>
+          <h3>Visible doubt still ends in the wrong answer.</h3>
+          <p class="sample-question"><strong>Question:</strong> A skater starts facing north and spins 2250 degrees to the right. Which direction is she facing?</p>
+          <div class="trace">
+            <p>The trace reduces 2250 degrees modulo 360 and identifies a 90-degree remainder.</p>
+            <p>It first maps that turn incorrectly, then reconsiders: <span class="highlight-negative">"Wait, I think I might be confused... If you start facing north and turn clockwise 90 degrees, you face east."</span></p>
+            <p>The doubt is explicit, but the trace still settles on <strong>west</strong>. The ground truth is <strong>east</strong>.</p>
+          </div>
+          <div class="sample-foot">Qwen3-4B-Think &middot; MATH-500 &middot; Doc 97</div>
+        </article>
       </div>
     </div>
   </section>
