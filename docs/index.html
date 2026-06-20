@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Not All Thinking Helps</title>
-<meta name="description" content="Which reasoning behaviors predict correctness? Thinking models amplify visible deliberation while leaving the behaviors most associated with correctness behind.">
+<title>Amplified Does Not Mean Predictive</title>
+<meta name="description" content="A behavioral analysis of reasoning traces showing that thinking models amplify visible deliberation without preferentially amplifying the behaviors most associated with correctness.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -206,9 +206,9 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
     </div>
 
     <div class="hero-copy">
-      <h1>Not All Thinking Helps</h1>
-      <p class="subtitle">Which Reasoning Behaviors Predict Correctness?</p>
-      <p class="hook">Thinking models amplify visible deliberation while leaving the behaviors most associated with correctness behind.</p>
+      <h1>Amplified Does Not Mean Predictive</h1>
+      <p class="subtitle">Reasoning Behaviors in Thinking Models</p>
+      <p class="hook">Thinking models amplify visible deliberation, but not the behaviors most associated with correct answers.</p>
       <div class="authors">
         <a href="https://nyandwi.com" target="_blank" rel="noopener">Jean de Dieu Nyandwi</a>,
         <a href="https://l-mathur.github.io/" target="_blank" rel="noopener">Leena Mathur</a>,
@@ -232,12 +232,12 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
     <div class="wrap">
       <div class="overview-copy">
         <div class="eyebrow">Overview</div>
-        <h2>We separate what models do more often from what actually predicts success.</h2>
-        <p class="lead">Across 15 open-weight LLMs and VLMs, 6 benchmarks, and 15,282 annotated reasoning traces, we ask whether reasoning-oriented training amplifies the behaviors most associated with correct answers. We find a consistent mismatch: thinking training strongly amplifies <strong>self-correction</strong>, <strong>hypothesis testing</strong>, and <strong>uncertainty acknowledgment</strong>, while the highest-lift behaviors are <strong>confidence calibration</strong>, <strong>knowledge alignment</strong>, and <strong>self-awareness</strong>.</p>
+        <h2>We separate behaviors that become frequent from behaviors associated with correctness.</h2>
+        <p class="lead">Across 15 open-weight LLMs and VLMs, 6 benchmarks, and 15,282 annotated reasoning traces, we ask whether thinking models amplify the behaviors most associated with correct answers. We find a consistent amplification-lift gap: thinking models strongly amplify <strong>self-correction</strong>, <strong>hypothesis testing</strong>, and <strong>uncertainty acknowledgment</strong>, while the highest-lift behaviors are <strong>confidence calibration</strong>, <strong>knowledge alignment</strong>, and <strong>self-awareness</strong>.</p>
       </div>
       <figure class="figure-large">
-        <img src="figures/fig_irony_v7-1.png" alt="Amplification by thinking training versus Behavioral Lift. The top-right quadrant is empty.">
-        <figcaption class="caption"><strong>The central mismatch:</strong> no behavior is both strongly amplified by thinking training and strongly associated with correctness.</figcaption>
+        <img src="figures/fig_irony_v7-1.png" alt="Amplification in thinking models versus Behavioral Lift. The top-right quadrant is empty.">
+        <figcaption class="caption"><strong>The central mismatch:</strong> no behavior is both strongly amplified in thinking models and strongly associated with correctness.</figcaption>
       </figure>
     </div>
   </section>
@@ -247,7 +247,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       <div class="section-head">
         <div class="eyebrow">Metrics</div>
         <div>
-          <h2>Two simple measurements: behavior value and recovery after failure.</h2>
+          <h2>Two measurements: association with correctness and recovery after failure.</h2>
           <p class="lead">Accuracy tells us whether an answer is right. These metrics ask what the trace is doing along the way.</p>
         </div>
       </div>
@@ -255,7 +255,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="metric">
           <div class="metric-title"><span class="swatch" style="background:var(--positive)"></span>Behavioral Lift</div>
           <div class="formula">Lift(b) = P(correct | b=true) - P(correct | b=false)</div>
-          <p>Measures how much correctness changes when a behavior appears in the trace. Lift separates prevalence from value.</p>
+          <p>Measures how much correctness changes when a behavior appears in the trace. Lift separates prevalence from association with correctness.</p>
         </div>
         <div class="metric">
           <div class="metric-title"><span class="swatch" style="background:var(--think)"></span>Recovery Rate</div>
@@ -293,7 +293,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
     <div class="wrap two-col">
       <div class="text-block">
         <div class="eyebrow">Result 1</div>
-        <h2>Thinking training amplifies correction, search, and uncertainty.</h2>
+        <h2>Thinking models amplify correction, search, and uncertainty.</h2>
         <p class="lead">Thinking models produce far more self-correction, hypothesis testing, and uncertainty acknowledgment than instruct models. Confidence calibration and knowledge alignment move much less.</p>
         <div class="callout-row">
           <div class="callout think"><span class="num">40-55%</span><span class="label">self-correction in thinking traces</span></div>
@@ -303,7 +303,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       </div>
       <figure class="figure">
         <img src="figures/fig1_metacognitive_gap.png" alt="Aggregate behavior prevalence for thinking and instruct models.">
-        <figcaption class="caption"><strong>Thinking training selectively amplifies visible deliberation:</strong> self-correction, hypothesis testing, and uncertainty acknowledgment show the largest prevalence gaps.</figcaption>
+        <figcaption class="caption"><strong>Thinking models selectively amplify visible deliberation:</strong> self-correction, hypothesis testing, and uncertainty acknowledgment show the largest prevalence gaps.</figcaption>
       </figure>
     </div>
   </section>
@@ -317,7 +317,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       <div class="text-block">
         <div class="eyebrow">Result 2</div>
         <h2>Amplified behaviors diverge from highest-lift behaviors.</h2>
-        <p class="lead">Confidence calibration is the strongest positive signal of correctness in both modalities, but thinking training barely amplifies it. Uncertainty acknowledgment is heavily amplified, yet weakly or negatively associated with correctness.</p>
+        <p class="lead">Confidence calibration is the strongest positive signal of correctness in both modalities, but thinking models barely amplify it. Uncertainty acknowledgment is heavily amplified, yet weakly or negatively associated with correctness.</p>
         <div class="table-panel">
           <table aria-label="Behavioral Lift values">
             <thead><tr><th>Behavior</th><th class="right">VLM Lift</th><th class="right">LLM Lift</th></tr></thead>
@@ -342,7 +342,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
           <div class="eyebrow">Robustness</div>
           <h2>The lift ranking holds across benchmarks.</h2>
           <p class="lead">The mismatch survives within individual benchmarks. Confidence calibration and knowledge alignment remain high-lift across tasks, while uncertainty acknowledgment stays low or negative.</p>
-          <p class="small-note">We also validate the ranking with same-question controls, hidden-state probes, and prompting interventions in the paper.</p>
+          <p class="small-note">We also validate the ranking with same-question controls, manual checks, hidden-state probes, and length controls in the paper.</p>
         </div>
         <figure class="figure">
           <img src="figures/fig_lift_heatmap_all_benchmarks.png" alt="Behavioral Lift across all LLM and VLM benchmarks.">
@@ -375,8 +375,8 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
     <div class="wrap two-col">
       <div class="text-block">
         <div class="eyebrow">Recovery Behaviors</div>
-        <h2>Which behaviors predict recovery from failures?</h2>
-        <p class="lead">Among traces with at least one detected failure, recovery is highest when the trace shows confidence calibration, knowledge alignment, self-correction, or self-awareness. Some frequent behaviors, including planning and evidence citation, add little recovery signal in this conditional view.</p>
+          <h2>Which behaviors are associated with recovery from failures?</h2>
+          <p class="lead">Among traces with at least one detected failure, recovery is highest when the trace shows confidence calibration, knowledge alignment, self-correction, or self-awareness. Some frequent behaviors, including planning and evidence citation, add little recovery signal in this conditional view.</p>
         <div class="callout-row">
           <div class="callout positive"><span class="num">+57pp</span><span class="label">recovery gap with confidence calibration</span></div>
           <div class="callout positive"><span class="num">+47pp</span><span class="label">recovery gap with knowledge alignment</span></div>
@@ -385,7 +385,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       </div>
       <figure class="figure">
         <img src="figures/fig_recovery_conditional.png" alt="Recovery rate conditional on behavior presence among traces with at least one detected failure.">
-        <figcaption class="caption"><strong>Recovery depends on behavior type:</strong> calibration and grounding predict recovery after detected failures; planning and evidence citation add little recovery signal.</figcaption>
+        <figcaption class="caption"><strong>Recovery depends on behavior type:</strong> calibration and grounding are associated with recovery after detected failures; planning and evidence citation add little recovery signal.</figcaption>
       </figure>
     </div>
   </section>
@@ -396,7 +396,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="eyebrow">Scaling</div>
         <div>
           <h2>The amplification gap persists at scale.</h2>
-          <p class="lead">Larger thinking models still strongly amplify self-correction and uncertainty behaviors. Meanwhile, confidence calibration converges and remains high-lift across model sizes.</p>
+          <p class="lead">Larger thinking models still strongly amplify self-correction and uncertainty behaviors. Meanwhile, confidence calibration narrows across model types and remains high-lift across model sizes.</p>
         </div>
       </div>
       <div class="scale-grid">
@@ -418,7 +418,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="eyebrow">Trace Examples</div>
         <div>
           <h2>Calibration and uncertainty leave very different fingerprints in a trace.</h2>
-          <p class="lead">A useful trace becomes more confident when independent checks agree. A visibly uncertain trace can still fail when doubt never resolves into better reasoning.</p>
+          <p class="lead">A calibrated trace becomes more confident when independent checks agree. A visibly uncertain trace can still fail when doubt never resolves into better reasoning.</p>
         </div>
       </div>
       <div class="sample-grid">
@@ -461,7 +461,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="eyebrow">Takeaways</div>
         <div>
           <h2>Train and evaluate the behaviors that make reasoning reliable.</h2>
-          <p class="lead">The practical lesson: use thinking models where they help, then audit the behaviors their traces reward.</p>
+          <p class="lead">Use thinking models where they help, then audit which behaviors their traces reward.</p>
         </div>
       </div>
       <div class="takeaway-list">
@@ -499,8 +499,8 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       </div>
       <div class="citation">
         <button class="copy" onclick="copyBib()" id="copyBtn">Copy</button>
-<pre>@article{nyandwi2026notallthinking,
-  title  = {Not All Thinking Helps: Which Reasoning Behaviors Predict Correctness?},
+<pre>@article{nyandwi2026amplified,
+  title  = {Amplified Does Not Mean Predictive: Reasoning Behaviors in Thinking Models},
   author = {Nyandwi, Jean de Dieu and Mathur, Leena and Bisk, Yonatan and Neubig, Graham},
   year   = {2026}
 }</pre>
