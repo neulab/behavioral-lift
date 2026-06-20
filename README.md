@@ -1,40 +1,40 @@
-# Not All Thinking Helps: Which Reasoning Behaviors Predict Correctness?
+# Amplified Does Not Mean Predictive: Reasoning Behaviors in Thinking Models
 
 **Jean de Dieu Nyandwi, Leena Mathur, Yonatan Bisk, Graham Neubig**
 
 We study a simple question:
 
-> Do reasoning-oriented "thinking" models amplify the behaviors that are actually associated with correct answers?
+> Do thinking models amplify the reasoning behaviors most associated with correct answers?
 
-Our answer is **not always**. Thinking training makes traces look more deliberative, but the most amplified behaviors are not the ones most associated with correctness.
+Our answer is **not necessarily**. Thinking models produce more visible deliberation, but the behaviors they amplify most are not the behaviors most associated with correctness.
 
 <p align="center">
   <img src="assets/amplification_mismatch.png" width="700"/>
 </p>
 
-The top-right quadrant is empty: no behavior is both strongly amplified by thinking training **and** strongly associated with correctness. Thinking models strongly amplify self-correction, hypothesis testing, and uncertainty acknowledgment — visible deliberation. But the behaviors with the highest lift, such as confidence calibration, knowledge alignment, and recognizing insufficient information, are quieter, and thinking training barely moves them.
+The top-right quadrant is empty: no behavior is both strongly amplified in thinking models and strongly associated with correctness. Thinking models strongly amplify self-correction, hypothesis testing, and uncertainty acknowledgment. The highest-lift behaviors are different: confidence calibration, knowledge alignment, and self-awareness about missing information.
 
 ## Behavioral Lift
 
-We introduce **Behavioral Lift**, a metric that separates how common a behavior is from how much it is associated with correctness:
+We introduce **Behavioral Lift**, a metric that separates how often a behavior appears from how much it is associated with correctness:
 
 $$\text{Lift}(b) = P(\text{correct} \mid b) - P(\text{correct} \mid \neg b)$$
 
-A behavior has high lift when responses containing it are more likely to be correct than responses without it. High prevalence alone says little: a behavior can appear everywhere and predict nothing.
+A behavior has high Lift when responses containing it are more often correct than responses without it. High prevalence alone is not enough: a behavior can appear frequently while adding little correctness signal. Behavioral Lift is a descriptive metric, not a causal estimate of what would happen if a behavior were forced into a trace.
 
 <p align="center">
   <img src="assets/fig2_behavioral_lift.png" width="700"/>
 </p>
 
-Behaviors differ sharply in how much they predict correctness. Confidence calibration, knowledge alignment, and self-awareness have high positive lift, while uncertainty acknowledgment is much weaker despite being strongly amplified by thinking training.
+Confidence calibration, knowledge alignment, and self-awareness have high positive Lift across modalities. Uncertainty acknowledgment is much weaker, and often negative, despite being strongly amplified in thinking traces.
 
 ## Key Takeaways
 
-**Amplification ≠ value.** Thinking training reliably amplifies correction, search, and uncertainty behaviors: self-correction, hypothesis testing, and uncertainty acknowledgment. But the highest-lift behaviors are different: confidence calibration, knowledge alignment, and self-awareness about missing information. The things models learn to do more of are not always the things that matter most.
+**Amplification is not Lift.** Thinking models reliably amplify correction, search, and uncertainty behaviors: self-correction, hypothesis testing, and uncertainty acknowledgment. The highest-lift behaviors are different: confidence calibration, knowledge alignment, and self-awareness about missing information.
 
-**Calibration is not hedging.** Confidence calibration is one of the strongest positive signals of correctness across both LLMs and VLMs. Uncertainty acknowledgment is heavily amplified but weakly, or negatively, associated with correctness. A model that says "maybe" at every step is not calibrated. Calibration means confidence tracks the strength of the reasoning.
+**Calibration is not hedging.** Confidence calibration is one of the strongest positive signals of correctness across both LLMs and VLMs. Uncertainty acknowledgment is heavily amplified but weakly or negatively associated with correctness. A model that says "maybe" at every step is not calibrated. Calibration means confidence tracks the strength of the reasoning.
 
-**Thinking models often win through recovery, not avoidance.** Thinking models help most when tasks reward extended computation or recovery from intermediate mistakes. On pattern-matching tasks where the first pass tends to be right or wrong, instruct models can perform comparably or better.
+**Thinking models often win through recovery, not prevention.** Thinking models help most when tasks reward extended computation or recovery from intermediate mistakes. On tasks where fast recognition of the relevant pattern is enough, instruct models can perform comparably or better.
 
 ## Repository Structure
 
@@ -107,8 +107,8 @@ The metric scripts accept either a single JSONL file or a directory containing J
 ## Citation
 
 ```bibtex
-@article{nyandwi2026notallthinking,
-  title={Not All Thinking Helps: Which Reasoning Behaviors Predict Correctness?},
+@article{nyandwi2026amplified,
+  title={Amplified Does Not Mean Predictive: Reasoning Behaviors in Thinking Models},
   author={Nyandwi, Jean de Dieu and Mathur, Leena and Bisk, Yonatan and Neubig, Graham},
   year={2026}
 }
