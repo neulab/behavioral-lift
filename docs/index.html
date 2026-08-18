@@ -198,7 +198,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
     <div class="topline">
       <div class="venue">Preprint</div>
       <nav class="nav" aria-label="Project links">
-        <a class="btn primary" href="#" target="_blank" rel="noopener">Paper</a>
+        <a class="btn primary" href="https://arxiv.org/abs/2608.13760" target="_blank" rel="noopener">Paper</a>
         <a class="btn" href="https://github.com/neulab/behavioral-lift" target="_blank" rel="noopener">Code</a>
         <a class="btn" href="https://huggingface.co/datasets/neulab/behavioral-lift" target="_blank" rel="noopener">Dataset</a>
         <a class="btn" href="#citation">Cite</a>
@@ -213,9 +213,10 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <a href="https://nyandwi.com" target="_blank" rel="noopener">Jean de Dieu Nyandwi</a>,
         <a href="https://l-mathur.github.io/" target="_blank" rel="noopener">Leena Mathur</a>,
         <a href="https://talkingtorobots.com/yonatanbisk.html" target="_blank" rel="noopener">Yonatan Bisk</a>,
+        <a href="https://rdhawkins.com/" target="_blank" rel="noopener">Robert Hawkins</a>,
         <a href="https://phontron.com" target="_blank" rel="noopener">Graham Neubig</a>
       </div>
-      <div class="affiliation">Language Technologies Institute, Carnegie Mellon University</div>
+      <div class="affiliation">Language Technologies Institute, Carnegie Mellon University &middot; Stanford University</div>
       <div class="stats" aria-label="Study summary">
         <div class="stat"><strong>15,282</strong>traces</div>
         <div class="stat"><strong>15</strong>models</div>
@@ -341,7 +342,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="text-block">
           <div class="eyebrow">Robustness</div>
           <h2>The lift ranking holds across benchmarks.</h2>
-          <p class="lead">The mismatch survives within individual benchmarks. Confidence calibration and knowledge alignment remain high-lift across tasks, while uncertainty acknowledgment stays low or negative.</p>
+          <p class="lead">Computing Lift inside each benchmark separately gives the same mismatch. Confidence calibration and knowledge alignment remain high-lift across tasks, while uncertainty acknowledgment stays low or negative.</p>
           <p class="small-note">We also validate the ranking with same-question controls, manual checks, hidden-state probes, and length controls in the paper.</p>
         </div>
         <figure class="figure">
@@ -360,7 +361,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       </figure>
       <div class="text-block">
         <div class="eyebrow">Result 3</div>
-        <h2>Thinking models often win through recovery rather than prevention.</h2>
+        <h2>Thinking models often succeed through recovery rather than prevention.</h2>
         <p class="lead">On extended-reasoning tasks, thinking models reach correct answers after detected failures at 2-3x the rate of instruct models. But on LogiQA2, where fast recognition of logical form can be enough, instruct models recover better.</p>
         <div class="callout-row">
           <div class="callout think"><span class="num">40.8 vs 17.8</span><span class="label">MATH-500 recovery rate</span></div>
@@ -396,7 +397,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="eyebrow">Scaling</div>
         <div>
           <h2>The amplification gap persists at scale.</h2>
-          <p class="lead">Larger thinking models still strongly amplify self-correction and uncertainty behaviors. Meanwhile, confidence calibration narrows across model types and remains high-lift across model sizes.</p>
+          <p class="lead">Larger thinking models still amplify self-correction and uncertainty behaviors. From 2B to 32B, the Lift of self-correction falls from +30.0 to +5.9, while confidence calibration Lift rises from +57.7 to +68.7.</p>
         </div>
       </div>
       <div class="scale-grid">
@@ -417,7 +418,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
       <div class="section-head">
         <div class="eyebrow">Trace Examples</div>
         <div>
-          <h2>Calibration and uncertainty leave very different fingerprints in a trace.</h2>
+          <h2>What calibration and uncertainty look like in a trace.</h2>
           <p class="lead">A calibrated trace becomes more confident when independent checks agree. A visibly uncertain trace can still fail when doubt never resolves into better reasoning.</p>
         </div>
       </div>
@@ -461,7 +462,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <div class="eyebrow">Takeaways</div>
         <div>
           <h2>Train and evaluate the behaviors that make reasoning reliable.</h2>
-          <p class="lead">Use thinking models where they help, then audit which behaviors their traces reward.</p>
+          <p class="lead">Use thinking models where they help, then check which behaviors their traces actually contain.</p>
         </div>
       </div>
       <div class="takeaway-list">
@@ -479,7 +480,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         </div>
         <div class="takeaway">
           <strong>Audit process objectives.</strong>
-          <p>Process supervision should reward grounded claims, appropriate domain framing, recognition of underspecified information, and recoverable reasoning instead of deliberative surface form alone.</p>
+          <p>Process supervision should reward grounded claims, appropriate domain framing, recognition of underspecified information, and confidence that tracks the strength of the reasoning.</p>
         </div>
       </div>
     </div>
@@ -492,7 +493,7 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <h2>Paper, code, annotations, and prompts.</h2>
         <p class="lead">We release the behavioral annotations, taxonomy definitions, judge prompts, and metric code for computing Behavioral Lift and Recovery Rate.</p>
         <div class="resource-links">
-          <a class="btn primary" href="#" target="_blank" rel="noopener">Paper</a>
+          <a class="btn primary" href="https://arxiv.org/abs/2608.13760" target="_blank" rel="noopener">Paper</a>
           <a class="btn" href="https://github.com/neulab/behavioral-lift" target="_blank" rel="noopener">GitHub</a>
           <a class="btn" href="https://huggingface.co/datasets/neulab/behavioral-lift" target="_blank" rel="noopener">Dataset</a>
         </div>
@@ -501,7 +502,8 @@ footer{padding:30px 0;text-align:center;color:var(--faint)}
         <button class="copy" onclick="copyBib()" id="copyBtn">Copy</button>
 <pre>@article{nyandwi2026amplified,
   title  = {Amplified Does Not Mean Predictive: Reasoning Behaviors in Thinking Models},
-  author = {Nyandwi, Jean de Dieu and Mathur, Leena and Bisk, Yonatan and Neubig, Graham},
+  author = {Nyandwi, Jean de Dieu and Mathur, Leena and Bisk, Yonatan and Hawkins, Robert and Neubig, Graham},
+  journal = {arXiv preprint arXiv:2608.13760},
   year   = {2026}
 }</pre>
       </div>
