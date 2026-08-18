@@ -1,12 +1,14 @@
 # Amplified Does Not Mean Predictive: Reasoning Behaviors in Thinking Models
 
-**Jean de Dieu Nyandwi, Leena Mathur, Yonatan Bisk, Graham Neubig**
+**Jean de Dieu Nyandwi, Leena Mathur, Yonatan Bisk, Robert Hawkins, Graham Neubig**
+
+[Paper](https://arxiv.org/abs/2608.13760) · [Website](https://neulab.github.io/behavioral-lift/) · [Dataset](https://huggingface.co/datasets/neulab/behavioral-lift)
 
 We study a simple question:
 
 > Do thinking models amplify the reasoning behaviors most associated with correct answers?
 
-Our answer is **not necessarily**. Thinking models produce more visible deliberation, but the behaviors they amplify most are not the behaviors most associated with correctness.
+**Largely, no.** Thinking models produce more visible deliberation, but the behaviors they amplify most are not the behaviors most associated with correctness.
 
 <p align="center">
   <img src="assets/amplification_mismatch.png" width="700"/>
@@ -109,7 +111,8 @@ The metric scripts accept either a single JSONL file or a directory containing J
 ```bibtex
 @article{nyandwi2026amplified,
   title={Amplified Does Not Mean Predictive: Reasoning Behaviors in Thinking Models},
-  author={Nyandwi, Jean de Dieu and Mathur, Leena and Bisk, Yonatan and Neubig, Graham},
+  author={Nyandwi, Jean de Dieu and Mathur, Leena and Bisk, Yonatan and Hawkins, Robert and Neubig, Graham},
+  journal={arXiv preprint arXiv:2608.13760},
   year={2026}
 }
 ```
